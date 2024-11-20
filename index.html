@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Scheduler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            text-align: center;
+        }
+
+        #schedule-btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        #schedule-img {
+            max-width: 80%;
+            height: auto;
+            border: 1px solid #000;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Optimal Task Scheduler</h1>
+    <button id="schedule-btn">Generate Schedule</button>
+    <div>
+        <img id="schedule-img" src="" alt="Task Execution Schedule" />
+    </div>
+
+    <script>
+        document.getElementById('schedule-btn').addEventListener('click', () => {
+            fetch('/schedule')
+                .then(response => response.blob())
+                .then(imageBlob => {
+                    const imgElement = document.getElementById('schedule-img');
+                    imgElement.src = URL.createObjectURL(imageBlob);
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
